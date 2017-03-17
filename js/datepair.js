@@ -61,8 +61,11 @@ var DatePair = function (shouldSetToNow, dateTimeObjects, highlightAdvance) {
         Assumes that time is in US format '11/13/2013'
     */
     this.dateToTime = function (value) {
-        var splitval = value.split(/[/-]/);
-        return new Date(splitval[2], splitval[0] - 1, splitval[1]);
+        //var splitval = value.split(/[/-]/);
+        //return new Date(splitval[2], splitval[0] - 1, splitval[1]);
+        // Above method breaks if someone changes the 'format' of date in datepicker settings.
+        // Date object can handle a range of date strings
+        return new Date(value);
     };
 
     /** Set entry time to now with a duration of one hour.
@@ -97,6 +100,7 @@ var DatePair = function (shouldSetToNow, dateTimeObjects, highlightAdvance) {
         this.startDate.datepicker({
             'autoclose': true,
             'todayHighlight': true,
+            'format':'dd M yyyy',
             'startDate': new Date(),
             'endDate': '+2m',
             'language': LOCALE_CODE
@@ -119,6 +123,7 @@ var DatePair = function (shouldSetToNow, dateTimeObjects, highlightAdvance) {
         // End date and time
         this.endDate.datepicker({
             'autoclose': true,
+            'format':'dd M yyyy',
             'startDate': new Date(),
             'endDate': '+2m',
             'language': LOCALE_CODE
